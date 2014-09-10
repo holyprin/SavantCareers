@@ -1,0 +1,44 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+	#import <UIKit/UIKit.h>
+	#import <Foundation/Foundation.h>
+#endif
+
+/*!
+ * @function Singleton GCD Macro
+ */
+#ifndef SINGLETON_GCD
+#define SINGLETON_GCD(classname)                        \
+\
++ (classname *)shared##classname {                      \
+\
+static dispatch_once_t pred;                        \
+__strong static classname * shared##classname = nil;\
+dispatch_once( &pred, ^{                            \
+shared##classname = [[self alloc] init]; });    \
+return shared##classname;                           \
+}
+#endif
+
+#define IS_OS_7_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+
+
+/*
+ * Colors...
+*/
+
+#define COLOR_TEAL [UIColor colorWithRed:10.0/255 green:77.0/255 blue:140.0/255 alpha:1.0f]
+#define COLOR_GRAY [UIColor colorWithRed:146.0/255 green:146.0/255 blue:146.0/255 alpha:1.0]
+#define COLOR_DARKCYAN [UIColor colorWithRed:0.0/255 green:107.0/255 blue:200.0/255 alpha:1.0]
+#define COLOR_DARKGRAY [UIColor colorWithRed:104.0/255 green:104.0/255 blue:104.0/255 alpha:1.0]
