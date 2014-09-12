@@ -14,11 +14,6 @@
 		45755EAF19BF8A560020A7F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45755EAE19BF8A560020A7F3 /* main.m */; };
 		45755EB319BF8A560020A7F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 45755EB219BF8A560020A7F3 /* AppDelegate.m */; };
 		45755EB519BF8A560020A7F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45755EB419BF8A560020A7F3 /* Images.xcassets */; };
-		45755EBC19BF8A560020A7F3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45755EBB19BF8A560020A7F3 /* XCTest.framework */; };
-		45755EBD19BF8A560020A7F3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45755EA219BF8A560020A7F3 /* Foundation.framework */; };
-		45755EBE19BF8A560020A7F3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45755EA619BF8A560020A7F3 /* UIKit.framework */; };
-		45755EC619BF8A560020A7F3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45755EC419BF8A560020A7F3 /* InfoPlist.strings */; };
-		45755EC819BF8A560020A7F3 /* SavantCareersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45755EC719BF8A560020A7F3 /* SavantCareersTests.m */; };
 		45755ED719BF8D960020A7F3 /* CareersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45755ED619BF8D960020A7F3 /* CareersTableViewController.m */; };
 		45755EDB19BF900D0020A7F3 /* CareerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45755EDA19BF900D0020A7F3 /* CareerTableViewCell.m */; };
 		45755EDF19BF90900020A7F3 /* Career.m in Sources */ = {isa = PBXBuildFile; fileRef = 45755EDE19BF90900020A7F3 /* Career.m */; };
@@ -30,16 +25,6 @@
 		45F53BD419BFB0C8004D3C62 /* CareersApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F53BD319BFB0C8004D3C62 /* CareersApi.m */; };
 		45F53BE019C03E2A004D3C62 /* CareerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F53BDF19C03E2A004D3C62 /* CareerDetailViewController.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		45755EBF19BF8A560020A7F3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45755E9719BF8A560020A7F3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 45755E9E19BF8A560020A7F3;
-			remoteInfo = SavantCareers;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		45755E9F19BF8A560020A7F3 /* SavantCareers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SavantCareers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,11 +38,7 @@
 		45755EB119BF8A560020A7F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		45755EB219BF8A560020A7F3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		45755EB419BF8A560020A7F3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SavantCareers/Images.xcassets; sourceTree = "<group>"; };
-		45755EBA19BF8A560020A7F3 /* SavantCareersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SavantCareersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45755EBB19BF8A560020A7F3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		45755EC319BF8A560020A7F3 /* SavantCareersTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SavantCareersTests-Info.plist"; sourceTree = "<group>"; };
-		45755EC519BF8A560020A7F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		45755EC719BF8A560020A7F3 /* SavantCareersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavantCareersTests.m; sourceTree = "<group>"; };
 		45755ED519BF8D960020A7F3 /* CareersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CareersTableViewController.h; sourceTree = "<group>"; };
 		45755ED619BF8D960020A7F3 /* CareersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CareersTableViewController.m; sourceTree = "<group>"; };
 		45755ED919BF900D0020A7F3 /* CareerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CareerTableViewCell.h; sourceTree = "<group>"; };
@@ -91,16 +72,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		45755EB719BF8A560020A7F3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				45755EBC19BF8A560020A7F3 /* XCTest.framework in Frameworks */,
-				45755EBE19BF8A560020A7F3 /* UIKit.framework in Frameworks */,
-				45755EBD19BF8A560020A7F3 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -119,7 +90,6 @@
 				4581BD6F19C24F11001566C9 /* lib */,
 				45755ED119BF8A970020A7F3 /* res */,
 				45755EA819BF8A560020A7F3 /* src */,
-				45755EC119BF8A560020A7F3 /* tests */,
 				45755EA119BF8A560020A7F3 /* frameworks */,
 				45755EA019BF8A560020A7F3 /* products */,
 				1EDDAA1D59B44B3997015BC8 /* Frameworks */,
@@ -130,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				45755E9F19BF8A560020A7F3 /* SavantCareers.app */,
-				45755EBA19BF8A560020A7F3 /* SavantCareersTests.xctest */,
 			);
 			name = products;
 			sourceTree = "<group>";
@@ -169,25 +138,6 @@
 				45755EAB19BF8A560020A7F3 /* InfoPlist.strings */,
 				45755EAE19BF8A560020A7F3 /* main.m */,
 				45755EB019BF8A560020A7F3 /* SavantCareers-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		45755EC119BF8A560020A7F3 /* tests */ = {
-			isa = PBXGroup;
-			children = (
-				45755EC719BF8A560020A7F3 /* SavantCareersTests.m */,
-				45755EC219BF8A560020A7F3 /* Supporting Files */,
-			);
-			name = tests;
-			path = SavantCareersTests;
-			sourceTree = "<group>";
-		};
-		45755EC219BF8A560020A7F3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				45755EC319BF8A560020A7F3 /* SavantCareersTests-Info.plist */,
-				45755EC419BF8A560020A7F3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -287,24 +237,6 @@
 			productReference = 45755E9F19BF8A560020A7F3 /* SavantCareers.app */;
 			productType = "com.apple.product-type.application";
 		};
-		45755EB919BF8A560020A7F3 /* SavantCareersTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 45755ECE19BF8A560020A7F3 /* Build configuration list for PBXNativeTarget "SavantCareersTests" */;
-			buildPhases = (
-				45755EB619BF8A560020A7F3 /* Sources */,
-				45755EB719BF8A560020A7F3 /* Frameworks */,
-				45755EB819BF8A560020A7F3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				45755EC019BF8A560020A7F3 /* PBXTargetDependency */,
-			);
-			name = SavantCareersTests;
-			productName = SavantCareersTests;
-			productReference = 45755EBA19BF8A560020A7F3 /* SavantCareersTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -316,9 +248,6 @@
 				TargetAttributes = {
 					45755E9E19BF8A560020A7F3 = {
 						DevelopmentTeam = W6A3LLRGM6;
-					};
-					45755EB919BF8A560020A7F3 = {
-						TestTargetID = 45755E9E19BF8A560020A7F3;
 					};
 				};
 			};
@@ -335,7 +264,6 @@
 			projectRoot = "";
 			targets = (
 				45755E9E19BF8A560020A7F3 /* SavantCareers */,
-				45755EB919BF8A560020A7F3 /* SavantCareersTests */,
 			);
 		};
 /* End PBXProject section */
@@ -347,14 +275,6 @@
 			files = (
 				45755EAD19BF8A560020A7F3 /* InfoPlist.strings in Resources */,
 				45755EB519BF8A560020A7F3 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		45755EB819BF8A560020A7F3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				45755EC619BF8A560020A7F3 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,37 +298,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		45755EB619BF8A560020A7F3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				45755EC819BF8A560020A7F3 /* SavantCareersTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		45755EC019BF8A560020A7F3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 45755E9E19BF8A560020A7F3 /* SavantCareers */;
-			targetProxy = 45755EBF19BF8A560020A7F3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		45755EAB19BF8A560020A7F3 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				45755EAC19BF8A560020A7F3 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		45755EC419BF8A560020A7F3 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				45755EC519BF8A560020A7F3 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -544,46 +440,6 @@
 			};
 			name = Release;
 		};
-		45755ECF19BF8A560020A7F3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SavantCareers.app/SavantCareers";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SavantCareers/SavantCareers-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "SavantCareersTests/SavantCareersTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		45755ED019BF8A560020A7F3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SavantCareers.app/SavantCareers";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SavantCareers/SavantCareers-Prefix.pch";
-				INFOPLIST_FILE = "SavantCareersTests/SavantCareersTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -601,15 +457,6 @@
 			buildConfigurations = (
 				45755ECC19BF8A560020A7F3 /* Debug */,
 				45755ECD19BF8A560020A7F3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		45755ECE19BF8A560020A7F3 /* Build configuration list for PBXNativeTarget "SavantCareersTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				45755ECF19BF8A560020A7F3 /* Debug */,
-				45755ED019BF8A560020A7F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
