@@ -8,20 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class TFHppleElement;
-
 @interface Career : NSObject
 
 @property(nonatomic, copy) NSString *title;
 @property(nonatomic, copy) NSString *location;
-@property(nonatomic, copy) NSString *date;
-@property(nonatomic, copy) NSString *shortDescription;
-@property(nonatomic, copy) NSString *longDescription;
+@property(nonatomic, copy) NSString *summary;
+@property(nonatomic, copy) NSAttributedString *fullDescription;
 @property(nonatomic, copy) NSURL *URL;
-
-- (id) initWithTitleElement:(TFHppleElement *)titleElement
-				bodyElement:(TFHppleElement *)bodyElement
-		  detailLinkElement:(TFHppleElement *)detailLinkElement
-				dateElement:(TFHppleElement *)dateElement;
 
 @end

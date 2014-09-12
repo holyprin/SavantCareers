@@ -21,11 +21,11 @@
 
 @property (nonatomic, strong) CareerTableViewCell *stubCell;
 
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation CareersTableViewController
-
-static const int ItemsPerPage = 10;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,6 +35,8 @@ static const int ItemsPerPage = 10;
     }
     return self;
 }
+
+
 
 - (void)viewDidLoad
 {
@@ -46,16 +48,26 @@ static const int ItemsPerPage = 10;
 	//Remove extra separators
 	self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 	
+	_activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	_activityIndicator.hidesWhenStopped = YES;
+	[_activityIndicator startAnimating];
+	_activityIndicator.frame = CGRectMake(_activityIndicator.frame.origin.x, _activityIndicator.frame.origin.y, 40, 40);
+	
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_activityIndicator];
+	
+	//Refresh control
+	self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self
+							action:@selector(loadCareers)
+                  forControlEvents:UIControlEventValueChanged];
+	
 	//prevent calling heightForRowAtIndexPath on hidden cells
 	if (IS_OS_7_OR_LATER)
 		self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
 	
-	//Initialize data
-	_data = [NSMutableArray new];
-	pageNum = 1;
-	
 	_api = [CareersApi sharedCareersApi];
 	
+	//Cheater cell for calculating cell height
 	_stubCell = [[CareerTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"CareerCell"];
 	
 	[self loadCareers];
@@ -66,10 +78,10 @@ static const int ItemsPerPage = 10;
     [super viewDidAppear:animated];
     
 	if (IS_OS_7_OR_LATER)
-    [[NSNotificationCenter defaultCenter] addObserver:self.tableView
-                                             selector:@selector(reloadData)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self.tableView
+												 selector:@selector(reloadData)
+													 name:UIContentSizeCategoryDidChangeNotification
+												   object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -77,45 +89,40 @@ static const int ItemsPerPage = 10;
     [super viewDidDisappear:animated];
 	
     if (IS_OS_7_OR_LATER)
-    [[NSNotificationCenter defaultCenter] removeObserver:self.tableView
-                                                    name:UIContentSizeCategoryDidChangeNotification
-                                                  object:nil];
+		[[NSNotificationCenter defaultCenter] removeObserver:self.tableView
+														name:UIContentSizeCategoryDidChangeNotification
+													  object:nil];
 }
 
 - (void)loadCareers
 {
-//	OGNode *page = [ObjectiveGumbo parseDocumentWithUrl:[NSURL URLWithString:[NSString stringWithFormat:CAREERS_URL, pageNum]]];
+	if (!_data)
+		_data = [NSMutableArray new];
 	
-//	NSArray *articleDiv = [page elementsWithClass:@"articlediv"];
-//	NSArray *dates = [((OGElement *)articleDiv[0]) elementsWithTag:GUMBO_TAG_H1];
-//	NSArray *titles = [((OGElement *)articleDiv[0]) elementsWithTag:GUMBO_TAG_H2];
-//	NSArray *bodies = [((OGElement *)articleDiv[0]) elementsWithClass:@"articlebody"];
-//	NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:CAREERS_URL, pageNum++]]];
-//	TFHpple *doc = [[TFHpple alloc] initWithHTMLData:data];
-//	//NSArray *elements = [doc searchWithXPathQuery:@"//div[@class='articlediv']/h2/a/strong"];
-//	//NSArray *elements = [doc searchWithXPathQuery:@"//div[@class='articlebody']"];
-//	NSArray *elements = [doc searchWithXPathQuery:@"//div[@class='articlebody']/a[@class='articleLink']"];
-//	for (TFHppleElement *element in elements) {
-//		NSLog(@"%@", [element objectForKey:@"href"]);
-//	}
-//	currentPageCount = titles.count;
-//	
-//					
-//					
-//	for (int i = 0; i < titles.count; i++) {
-//		OGElement *title = titles[i];
-//		OGElement *body = bodies[i];
-//		Career *career = [[Career alloc] init];
-//		career.title = title.text;
-//		NSLog(@"%@", ((OGElement *)body.children[1]).tag);
-//		career.shortDescription = ((OGElement *)body.children[1]).text;
-//		GumboTag
-//		[_data addObject:career];
-//	}
-	
-	[_api loadCareerListAtPage:pageNum++ withCompletion:^(NSArray *careers, NSError *error) {
-		[_data addObjectsFromArray:careers];
-		[self.tableView reloadData];
+	[_activityIndicator startAnimating];
+	[_api loadCareerListWithCompletion:^(NSArray *careers, NSError *error) {
+		
+		//Refreshing stuff
+		[self->_activityIndicator stopAnimating];
+		if ([self.refreshControl isRefreshing])
+			[self.refreshControl endRefreshing];
+		
+		if (careers.count > 0) {
+			
+			NSMutableArray *indexPaths = [NSMutableArray new];
+			for (int i = self->_data.count; i < self->_data.count + careers.count; i++) {
+				[indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+			}
+			
+			[self->_data addObjectsFromArray:careers];
+			[self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+		
+		}
+		else {
+			self->_data = nil;
+			[self.tableView reloadData];
+		}
+		
 	}];
 	
 }
@@ -129,7 +136,21 @@ static const int ItemsPerPage = 10;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+	if (_data)
+		return 1;
+	else {
+		UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No data is currently available. Please pull down to refresh.";
+        messageLabel.textColor = [UIColor blackColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+	}
+	return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -139,7 +160,8 @@ static const int ItemsPerPage = 10;
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 100.0f;
+	//Estimated value between lowest height and full height.
+	return 50.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -175,12 +197,6 @@ static const int ItemsPerPage = 10;
     [cell updateConstraintsIfNeeded];
 	
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	if (_data.count % ItemsPerPage == 0 && indexPath.row == _data.count -1)
-		[self loadCareers];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

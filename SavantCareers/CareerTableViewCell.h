@@ -12,8 +12,7 @@
 @interface CareerTableViewCell : UITableViewCell
 
 @property (nonatomic, readonly, strong) UILabel *titleLabel;
-@property (nonatomic, readonly, strong) UILabel *descriptionLabel;
-@property (nonatomic, readonly, strong) UILabel *dateLabel;
+@property (nonatomic, readonly, strong) UILabel *summaryLabel;
 @property (nonatomic, readonly, strong) UILabel *locationLabel;
 
 - (void)configureCellWithCareer:(Career *)career;

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 @class Career;
 
-@interface CareerDetailViewController : UIViewController
+@interface CareerDetailViewController : UIViewController<MFMailComposeViewControllerDelegate>
 
 - (id)initWithCareer:(Career *)career;
 

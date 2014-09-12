@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#define BASE_URL_STRING @"http://www.savantsystems.com"
-
+#define BASE_URL_STRING @"http://www.savant.com"
 #define BASE_URL [NSURL URLWithString:BASE_URL_STRING]
-#define CAREERS_URL(pageNum) [NSURL URLWithString:[NSString stringWithFormat:@"%@/careers/%i/careers.aspx",BASE_URL_STRING, pageNum]]
+
+#define CAREERS_PATH @"/join_our_team"
+#define CAREERS_URL [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_URL_STRING, CAREERS_PATH]]
 
 @class Career;
 
@@ -19,10 +20,9 @@
 
 //Class
 + (id)sharedCareersApi;
-+ (NSString *)cleanString:(NSString *)string;
 
 //Instance
-- (void)loadCareerListAtPage:(int)pageNum withCompletion:(void (^)(NSArray *careers, NSError *error))completion;
-- (void)loadCareerDetailsWithCareer:(Career *)career withCompletion:(void (^)(NSString *careerDetails, NSError *error))completion;
+- (void)loadCareerListWithCompletion:(void (^)(NSArray *careers, NSError *error))completion;
+- (void)loadCareerDetailsWithCareer:(Career *)career withCompletion:(void (^)(Career *career, NSError *error))completion;
 
 @end

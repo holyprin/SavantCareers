@@ -18,13 +18,20 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
 
-	if (IS_OS_7_OR_LATER)
+	//Appearance
+	if (IS_OS_7_OR_LATER) {
 		[UINavigationBar appearance].barTintColor = COLOR_TEAL;
-	else
+		[UINavigationBar appearance].tintColor = [UIColor whiteColor];
+		[application setStatusBarHidden:NO];
+		[application setStatusBarStyle:UIStatusBarStyleLightContent];
+	}
+	else {
 		[UINavigationBar appearance].tintColor = COLOR_TEAL;
+	}
 	
 	//Navigation Root Table View Controller
 	CareersTableViewController *rootViewController = [[CareersTableViewController alloc] initWithStyle:UITableViewStylePlain];
+	
 	//Application Root View Controller
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 
