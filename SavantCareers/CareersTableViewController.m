@@ -16,6 +16,7 @@
 	int pageNum;
 	int currentPageCount;
 }
+
 @property (nonatomic, weak) CareersApi *api;
 @property (nonatomic, strong) NSMutableArray *data;
 
@@ -35,8 +36,6 @@
     }
     return self;
 }
-
-
 
 - (void)viewDidLoad
 {
@@ -69,6 +68,18 @@
 	
 	//Cheater cell for calculating cell height
 	_stubCell = [[CareerTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"CareerCell"];
+	
+	//No data message
+	UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+	
+	messageLabel.text = @"No data is currently available.\nPlease pull down to refresh.";
+	messageLabel.textColor = [UIColor blackColor];
+	messageLabel.numberOfLines = 0;
+	messageLabel.textAlignment = NSTextAlignmentCenter;
+	messageLabel.font = [UIFont italicSystemFontOfSize:20];
+	[messageLabel sizeToFit];
+	
+	self.tableView.backgroundView = messageLabel;
 	
 	[self loadCareers];
 }
@@ -110,7 +121,7 @@
 		if (careers.count > 0) {
 			
 			NSMutableArray *indexPaths = [NSMutableArray new];
-			for (int i = self->_data.count; i < self->_data.count + careers.count; i++) {
+			for (int i = (int)self->_data.count; i < (int)self->_data.count + careers.count; i++) {
 				[indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
 			}
 			
@@ -130,27 +141,15 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+	_data = nil;
+	[self.tableView reloadData];
 }
 
 #pragma mark - Table view data source / delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	if (_data)
-		return 1;
-	else {
-		UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        
-        messageLabel.text = @"No data is currently available. Please pull down to refresh.";
-        messageLabel.textColor = [UIColor blackColor];
-        messageLabel.numberOfLines = 0;
-        messageLabel.textAlignment = NSTextAlignmentCenter;
-        messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
-        [messageLabel sizeToFit];
-        
-        self.tableView.backgroundView = messageLabel;
-	}
-	return 0;
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -160,7 +159,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//Estimated value between lowest height and full height.
 	return 50.0f;
 }
 

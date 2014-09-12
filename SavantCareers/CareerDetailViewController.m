@@ -142,7 +142,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)applyTouched:(id)sender
@@ -160,9 +159,11 @@
 		mailComposeController.navigationBar.tintColor = [UIColor whiteColor];
 		mailComposeController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor:[UIColor whiteColor] };
 	}
-	
+
     [self presentViewController:mailComposeController animated:YES completion:NULL];
 }
+
+#pragma mark MFMailComposeViewControllerDelegate
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {

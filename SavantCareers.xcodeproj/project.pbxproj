@@ -80,6 +80,10 @@
 			children = (
 				4581BD7B19C39D2F001566C9 /* MessageUI.framework */,
 				45F53BD519BFCF9A004D3C62 /* libxml2.2.dylib */,
+				45755EA219BF8A560020A7F3 /* Foundation.framework */,
+				45755EA419BF8A560020A7F3 /* CoreGraphics.framework */,
+				45755EA619BF8A560020A7F3 /* UIKit.framework */,
+				45755EBB19BF8A560020A7F3 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -90,7 +94,6 @@
 				4581BD6F19C24F11001566C9 /* lib */,
 				45755ED119BF8A970020A7F3 /* res */,
 				45755EA819BF8A560020A7F3 /* src */,
-				45755EA119BF8A560020A7F3 /* frameworks */,
 				45755EA019BF8A560020A7F3 /* products */,
 				1EDDAA1D59B44B3997015BC8 /* Frameworks */,
 			);
@@ -104,24 +107,12 @@
 			name = products;
 			sourceTree = "<group>";
 		};
-		45755EA119BF8A560020A7F3 /* frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				45755EA219BF8A560020A7F3 /* Foundation.framework */,
-				45755EA419BF8A560020A7F3 /* CoreGraphics.framework */,
-				45755EA619BF8A560020A7F3 /* UIKit.framework */,
-				45755EBB19BF8A560020A7F3 /* XCTest.framework */,
-			);
-			name = frameworks;
-			sourceTree = "<group>";
-		};
 		45755EA819BF8A560020A7F3 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				45755EDC19BF906D0020A7F3 /* Models */,
+				45755EDC19BF906D0020A7F3 /* Model */,
 				45755ED819BF8FEE0020A7F3 /* TableViewCell */,
 				45755ED419BF8B580020A7F3 /* Api */,
-				45755ED319BF8B4F0020A7F3 /* View */,
 				45755ED219BF8B420020A7F3 /* ViewController */,
 				45755EB119BF8A560020A7F3 /* AppDelegate.h */,
 				45755EB219BF8A560020A7F3 /* AppDelegate.m */,
@@ -161,13 +152,6 @@
 			name = ViewController;
 			sourceTree = "<group>";
 		};
-		45755ED319BF8B4F0020A7F3 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
 		45755ED419BF8B580020A7F3 /* Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,13 +170,13 @@
 			name = TableViewCell;
 			sourceTree = "<group>";
 		};
-		45755EDC19BF906D0020A7F3 /* Models */ = {
+		45755EDC19BF906D0020A7F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				45755EDD19BF90900020A7F3 /* Career.h */,
 				45755EDE19BF90900020A7F3 /* Career.m */,
 			);
-			name = Models;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		4581BD6F19C24F11001566C9 /* lib */ = {
