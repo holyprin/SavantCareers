@@ -110,6 +110,9 @@
 	if (!_data)
 		_data = [NSMutableArray new];
 	
+	[_data removeAllObjects];
+	[self.tableView reloadData];
+	
 	[_activityIndicator startAnimating];
 	[_api loadCareerListWithCompletion:^(NSArray *careers, NSError *error) {
 		
