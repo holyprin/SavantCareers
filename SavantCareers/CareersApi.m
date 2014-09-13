@@ -122,27 +122,17 @@ SINGLETON_GCD(CareersApi)
 //particular case it's fine because it's fast enough.
 - (NSString *)formatAndStripHtmlFromString:(NSString *)string
 {
+	string = [string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 	NSRange range;
 	//br's are bad!
 	while ((range = [string rangeOfString:@"<br\\s*/?>" options:NSRegularExpressionSearch | NSRegularExpressionCaseInsensitive]).location != NSNotFound)
+		string = [string stringByReplacingCharactersInRange:range withString:@"\n"];
+	
+	while ((range = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
 		string = [string stringByReplacingCharactersInRange:range withString:@""];
 	
-	//Special cases...
-	string = [string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-	string = [string stringByReplacingOccurrencesOfString:@"</h4>" withString:@""];
-	string = [string stringByReplacingOccurrencesOfString:@"•" withString:@"\n•"];
-	string = [string stringByReplacingOccurrencesOfString:@"<li>" withString:@"<li>• "];
-	
-	//opening tags
-	while ((range = [string rangeOfString:@"<[^/>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-		string = [string stringByReplacingCharactersInRange:range withString:@"\n"];
-	//closing tags
-	while ((range = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-		string = [string stringByReplacingCharactersInRange:range withString:@"\n"];
-	
-	//remove triple breaks
-	string = [string stringByReplacingOccurrencesOfString:@"\n\n\n" withString:@"\n\n"];
-	
+	string = [string stringByAppendingString:@"\n\n"];
+
 	return string;
 }
 

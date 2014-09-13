@@ -110,7 +110,7 @@
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_detailLabel]-10-|" options:0 metrics:nil views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[_applyButton]-40-|" options:0 metrics:nil views:views]];
 	
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_titleLabel]-3-[_locationLabel(>=0)]-(-10)-[_detailLabel]-10-[_applyButton(==30)]-10-|" options:0 metrics:nil views:views]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_titleLabel]-3-[_locationLabel(>=0)]-10-[_detailLabel]-10-[_applyButton(==30)]-10-|" options:0 metrics:nil views:views]];
 	
 	_scrollView.alpha = 0.0f;
 	
