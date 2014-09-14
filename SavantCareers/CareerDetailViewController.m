@@ -119,10 +119,21 @@
 		[[CareersApi sharedCareersApi] loadCareerDetailsWithCareer:_career withCompletion:^(Career *career, NSError *error) {
 			dispatch_async(dispatch_get_main_queue(), ^{
 				[self->_activityIndicator stopAnimating];
-				self->_detailLabel.attributedText = career.fullDescription;
-				[UIView animateWithDuration:0.3f animations:^{
-					self->_scrollView.alpha = 1.0f;
-				}];
+				
+				if (error) {
+					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error processing your request.\nPlease try again later." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+					[alert show];
+					
+					//Pop to list since we couldn't grab the description.
+					[self.navigationController popViewControllerAnimated:NO];
+				}
+				else {
+					self->_detailLabel.attributedText = career.fullDescription;
+					[UIView animateWithDuration:0.3f animations:^{
+						self->_scrollView.alpha = 1.0f;
+					}];
+				}
+				
 			});
 		}];
 	}

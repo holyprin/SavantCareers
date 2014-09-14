@@ -135,6 +135,10 @@
 		else {
 			self->_data = nil;
 			[self.tableView reloadData];
+			if (error) {
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error processing your request.\nPlease try again later." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+				[alert show];
+			}
 		}
 		
 	}];

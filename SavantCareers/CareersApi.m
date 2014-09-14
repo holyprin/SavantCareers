@@ -112,7 +112,7 @@ SINGLETON_GCD(CareersApi)
 			
 		}
 		career.fullDescription = finalString;
-		
+
 		if (completion)
 			completion(career, error);
 	});
