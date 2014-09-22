@@ -34,15 +34,15 @@ SINGLETON_GCD(CareersApi)
 	return self;
 }
 
-- (void)loadCareerListWithCompletion:(void (^)(NSArray *careers, NSError *error))completion;
+- (void)loadCareerListForPage:(int)page andCompletion:(void (^)(NSArray *careers, NSError *error))completion;
 {
-	NSURLRequest *request = [NSURLRequest requestWithURL:CAREERS_URL];
+	NSURLRequest *request = [NSURLRequest requestWithURL:CAREERS_URL(page)];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[NSURLConnection sendAsynchronousRequest:request queue:_defaultQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		
 		TFHpple *search = [TFHpple hppleWithHTMLData:data encoding:@"UTF-8"];
-		NSArray *resultsArray = [search searchWithXPathQuery:@"//div[contains(@class, 'view-open-positions')]//ul/li"];
+		NSArray *resultsArray = [search searchWithXPathQuery:@"//div[contains(@class, 'view-open-positions') and not(contains(@class, 'pager'))]//ul/li"];
 		
 		NSMutableArray *careers = [NSMutableArray new];
 		
@@ -52,7 +52,7 @@ SINGLETON_GCD(CareersApi)
 				NSArray *titleElements = [element searchWithXPathQuery:@"//div[contains(@class,'views-field-title')]//text()[normalize-space()]"];
 				
 				//Check if we parsed correctly and objects within are TFHppleElements if not skip.
-				if (titleElements.count == 0 && ![titleElements[0] isKindOfClass:[TFHppleElement class]])
+				if (titleElements.count == 0)
 					continue;
 				
 				NSArray *summaryElements = [element searchWithXPathQuery:@"//div[contains(@class,'views-field-field-summary')]//text()[normalize-space()]"];
@@ -113,6 +113,7 @@ SINGLETON_GCD(CareersApi)
 		}
 		career.fullDescription = finalString;
 
+		
 		if (completion)
 			completion(career, error);
 	});

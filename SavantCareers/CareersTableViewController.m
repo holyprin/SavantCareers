@@ -14,7 +14,7 @@
 @interface CareersTableViewController ()
 {
 	int pageNum;
-	int currentPageCount;
+	int perPage;
 }
 
 @property (nonatomic, weak) CareersApi *api;
@@ -57,7 +57,7 @@
 	//Refresh control
 	self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self
-							action:@selector(loadCareers)
+							action:@selector(reloadCareers)
                   forControlEvents:UIControlEventValueChanged];
 	
 	//prevent calling heightForRowAtIndexPath on hidden cells
@@ -80,6 +80,8 @@
 	[messageLabel sizeToFit];
 	
 	self.tableView.backgroundView = messageLabel;
+	pageNum = 0;
+	perPage = 8;
 	
 	[self loadCareers];
 }
@@ -110,45 +112,53 @@
 	if (!_data)
 		_data = [NSMutableArray new];
 	
+	if (_data.count % perPage == 0 || _data.count == 0) {
+		
+		[_activityIndicator startAnimating];
+		[_api loadCareerListForPage:pageNum++ andCompletion:^(NSArray *careers, NSError *error) {
+			
+			//Refreshing stuff
+			[self->_activityIndicator stopAnimating];
+			if ([self.refreshControl isRefreshing])
+				[self.refreshControl endRefreshing];
+			
+			if (careers.count > 0) {
+				
+				NSMutableArray *indexPaths = [NSMutableArray new];
+				for (int i = (int)self->_data.count; i < (int)self->_data.count + careers.count; i++) {
+					[indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+				}
+				
+				[self->_data addObjectsFromArray:careers];
+				[self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+				
+			}
+			else {
+				self->_data = nil;
+				[self.tableView reloadData];
+				if (error) {
+					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error processing your request.\nPlease try again later." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+					[alert show];
+				}
+			}
+		}];
+	}
+	
+}
+
+- (void)reloadCareers
+{
+	pageNum = 0;
 	[_data removeAllObjects];
 	[self.tableView reloadData];
-	
-	[_activityIndicator startAnimating];
-	[_api loadCareerListWithCompletion:^(NSArray *careers, NSError *error) {
-		
-		//Refreshing stuff
-		[self->_activityIndicator stopAnimating];
-		if ([self.refreshControl isRefreshing])
-			[self.refreshControl endRefreshing];
-		
-		if (careers.count > 0) {
-			
-			NSMutableArray *indexPaths = [NSMutableArray new];
-			for (int i = (int)self->_data.count; i < (int)self->_data.count + careers.count; i++) {
-				[indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-			}
-			
-			[self->_data addObjectsFromArray:careers];
-			[self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-		
-		}
-		else {
-			self->_data = nil;
-			[self.tableView reloadData];
-			if (error) {
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error processing your request.\nPlease try again later." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-				[alert show];
-			}
-		}
-		
-	}];
-	
+	[self loadCareers];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 	_data = nil;
+	
 	[self.tableView reloadData];
 }
 
@@ -202,6 +212,12 @@
     [cell updateConstraintsIfNeeded];
 	
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (indexPath.row == _data.count - 1)
+		[self loadCareers];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

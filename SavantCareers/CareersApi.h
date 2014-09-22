@@ -12,7 +12,7 @@
 #define BASE_URL [NSURL URLWithString:BASE_URL_STRING]
 
 #define CAREERS_PATH @"/join_our_team"
-#define CAREERS_URL [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_URL_STRING, CAREERS_PATH]]
+#define CAREERS_URL(page) [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?page=%i", BASE_URL_STRING, CAREERS_PATH, page]]
 
 @class Career;
 
@@ -22,7 +22,7 @@
 + (id)sharedCareersApi;
 
 //Instance
-- (void)loadCareerListWithCompletion:(void (^)(NSArray *careers, NSError *error))completion;
+- (void)loadCareerListForPage:(int)page andCompletion:(void (^)(NSArray *careers, NSError *error))completion;
 - (void)loadCareerDetailsWithCareer:(Career *)career withCompletion:(void (^)(Career *career, NSError *error))completion;
 
 @end
